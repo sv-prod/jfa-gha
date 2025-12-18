@@ -1,0 +1,24 @@
+name: my-gha-workflow
+ 
+on:
+  push:
+
+permissions:
+  id-token: write 
+  contents: read
+  
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Register Build Artifact
+        uses: cloudbees-io-gha/register-build-artifact@v3
+        with:
+          name: "GHA-Jfrog"
+          version: "1.11"
+          type: docker
+          url: "cbjfrog.saas-preprod.beescloud.com/jfrog-test-docker-target-repo/test-image:1.11"
+          cloudbees-url: "https://api.cloudbees.io" 
